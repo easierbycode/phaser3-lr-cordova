@@ -1,0 +1,8 @@
+NOW
+===
+- add cordova
+
+
+LATER
+=====
+- create Android build
