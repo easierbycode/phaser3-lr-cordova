@@ -1,8 +1,8 @@
 const SCALE = 1;
 
 export default {
-  WIDTH: window.innerWidth,
-  HEIGHT: window.innerHeight,
+  WIDTH: 512,
+  HEIGHT: 288,
   SCALE: SCALE
 };
 
