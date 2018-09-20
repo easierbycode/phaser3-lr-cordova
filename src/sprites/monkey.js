@@ -6,6 +6,14 @@ export default class Monkey extends Phaser.Physics.Arcade.Sprite {
     constructor({ scene, x, y }) {
         super(scene, x, y, 'monkey');
 
+        this.setOrigin( 0.5, 1 );
+
+        this.health = 1;
+        
+        this.scene  = scene;
+
+        scene.physics.add.existing( this );
+
         this.setScale( 6 );
 
         // bloodAnimation
@@ -23,27 +31,27 @@ export default class Monkey extends Phaser.Physics.Arcade.Sprite {
 
         let bone      = scene.add.particles('bone');
 
-        let bones     = bone.createEmitter({
+        this.bones     = bone.createEmitter({
             frame: [0,1,2,3,4,5,6,7],
             speed: 750,
             on: false
         });
 
-        bones.startFollow( this );
+        this.bones.startFollow( this );
 
         let muscle      = scene.add.particles('muscle');
 
-        let muscles     = muscle.createEmitter({
+        this.muscles     = muscle.createEmitter({
             frame: [0,1,2,3,4,5,6,7],
             speed: 1500,
             on: false
         });
 
-        muscles.startFollow( this );
+        this.muscles.startFollow( this );
         
         let explosion   = scene.add.particles('explosion');
 
-        let emitter     = explosion.createEmitter({
+        this.explosionFlash     = explosion.createEmitter({
             frame       : 'muzzleflash2',
             lifespan    : 200,
             scale       : { start: 4, end: 0 },
@@ -51,32 +59,49 @@ export default class Monkey extends Phaser.Physics.Arcade.Sprite {
             on          : false
         });
 
-        emitter.startFollow( this );
+        this.explosionFlash.startFollow( this );
 
-        scene.time.delayedCall(
-            1975,
-            () => {
-                this.alpha  = 0;
-                bones.explode( 16 )
-                scene.cameras.main.shake( 500, 0.01 );
-            }
-        );
-        
-        scene.time.delayedCall(
-            2000,
-            () => {
-                emitter.explode( 1 );
+        scene.add.existing( this );
+    }
 
-                let blood   = scene.add.sprite( x, y, 'blood' )
+    destroy() {
+        this.bones.explode( 16 )
+        this.scene.cameras.main.shake( 500, 0.01 );
+
+        this.scene.time.delayedCall(
+            25,
+            function() {
+                this.explosionFlash.explode( 1 );
+
+                // blood
+                this.scene.add.sprite( this.x, this.y, 'blood' )
                     .setScale( 2.5 )
                     .play( 'bloodAnimation' );
 
-                muscles.explode( 60 );
-            }
+                this.muscles.explode( 60 );
+            },
+            [],
+            this
         )
 
-        scene.time.delayedCall( 2025, () => muscles.explode( 32 ) );
+        this.scene.time.delayedCall( 50, () => {
+            this.muscles.explode( 32 );
+            super.destroy();
+        });
+    }
 
-        scene.add.existing( this );
+    damage( bullet ) {
+        
+        this.health -= (bullet.damagePoints || 1);
+
+        let isDead  = this.health <= 0;
+
+        if ( isDead ) {
+            this.setActive( false );
+            this.setVisible( false );
+            this.destroy();
+        }
+
+        return isDead;
     }
 }

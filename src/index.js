@@ -13,6 +13,9 @@ const config = {
   type: Phaser.AUTO,
   width: constants.WIDTH,
   height: constants.HEIGHT,
+  physics: {
+    default: 'arcade'
+  },
   scene: [
     GameScene
   ],
