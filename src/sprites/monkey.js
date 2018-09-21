@@ -66,6 +66,13 @@ export default class Monkey extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing( this );
     }
 
+    bloodAnimation() {
+        // blood
+        this.scene.add.sprite( this.x, this.y - this.body.halfHeight, 'blood' )
+            .setScale( 2.5 )
+            .play( 'bloodAnimation' );
+    }
+
     destroy() {
         this.bones.explode( 16 )
         this.scene.cameras.main.shake( 500, 0.01 );
@@ -75,10 +82,7 @@ export default class Monkey extends Phaser.Physics.Arcade.Sprite {
             function() {
                 this.explosionFlash.explode( 1 );
 
-                // blood
-                this.scene.add.sprite( this.x, this.y, 'blood' )
-                    .setScale( 2.5 )
-                    .play( 'bloodAnimation' );
+                this.bloodAnimation();
 
                 this.muscles.explode( 60 );
             },

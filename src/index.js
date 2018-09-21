@@ -5,7 +5,8 @@ import Phaser from 'phaser';
 
 import constants from './config/constants';
 // import GameScene from './scenes/game';
-import Parabomb from './scenes/game2-parabomb';
+// import Parabomb from './scenes/game2-parabomb';
+import Animus from './scenes/game3-animus';
 
 
 window.Phaser = Phaser;
@@ -19,7 +20,8 @@ const config = {
   },
   scene: [
     // GameScene
-    Parabomb
+    // Parabomb
+    Animus
   ],
   pixelArt: true,
   antialias: false
