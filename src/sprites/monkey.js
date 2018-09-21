@@ -16,6 +16,8 @@ export default class Monkey extends Phaser.Physics.Arcade.Sprite {
 
         this.setScale( 6 );
 
+        this.setOffset( 4, 0 );
+
         // bloodAnimation
         scene.anims.create({
             frameRate   : 20,

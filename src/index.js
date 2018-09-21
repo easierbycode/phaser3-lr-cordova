@@ -4,7 +4,8 @@ import './font-loader';
 import Phaser from 'phaser';
 
 import constants from './config/constants';
-import GameScene from './scenes/game';
+// import GameScene from './scenes/game';
+import Parabomb from './scenes/game2-parabomb';
 
 
 window.Phaser = Phaser;
@@ -17,7 +18,8 @@ const config = {
     default: 'arcade'
   },
   scene: [
-    GameScene
+    // GameScene
+    Parabomb
   ],
   pixelArt: true,
   antialias: false
