@@ -9,6 +9,7 @@ import Parabomb from './scenes/game2-parabomb';
 import Animus from './scenes/game3-animus';
 import LiuKang from './scenes/game4-liu-kang';
 import RainbowDash from './scenes/game4-rainbow-dash';
+import BowserAndPeach from './scenes/game6-bowser-and-peach';
 
 
 window.Phaser = Phaser;
@@ -24,8 +25,9 @@ const config = {
     // GameScene
     // Parabomb
     // Animus
-    LiuKang
+    // LiuKang
     // RainbowDash
+    BowserAndPeach
   ],
   pixelArt: true,
   antialias: false
