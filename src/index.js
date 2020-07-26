@@ -24,10 +24,10 @@ const config = {
   scene: [
     // GameScene
     // Parabomb
-    // Animus
+    Animus
     // LiuKang
     // RainbowDash
-    BowserAndPeach
+    // BowserAndPeach
   ],
   pixelArt: true,
   antialias: false

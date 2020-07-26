@@ -186,6 +186,10 @@ export default class Animus extends Phaser.Physics.Arcade.Sprite {
 
         this.on('animationcomplete_putDown', (anim) => {
             
+            var destroyVictim = () => {
+                this.victim.destroy();
+            }
+            
             this.play( 'bloodyLaugh' );
             
             // hide bloodSplat
@@ -208,6 +212,11 @@ export default class Animus extends Phaser.Physics.Arcade.Sprite {
             this.victim.setAngularVelocity( 600 );
             this.victim.setVelocityX( 600 );
             this.victim.setCollideWorldBounds( true );
+
+            this.scene.time.delayedCall(
+                500,
+                destroyVictim
+            );
         })
 
         this.play( 'laugh' );
@@ -216,6 +225,7 @@ export default class Animus extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
+        if ( !this.victim.body )  return;
         if ( !this.victim.body.angularVelocity )  return;
         
         let touching = this.victim.body.checkWorldBounds();

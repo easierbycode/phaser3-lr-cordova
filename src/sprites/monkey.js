@@ -73,6 +73,11 @@ export default class Monkey extends Phaser.Physics.Arcade.Sprite {
             .play( 'bloodAnimation' );
     }
 
+    showCodeMonkeyBanner() {
+        // show CodeMonkey.Games text
+        this.scene.add.text(this.x - (this.body.halfWidth + 10), this.y - this.body.halfHeight, 'CodeMonkey.Games', { font: '"Bangers"' });
+    }
+
     destroy() {
         this.bones.explode( 16 )
         this.scene.cameras.main.shake( 500, 0.01 );
@@ -85,6 +90,8 @@ export default class Monkey extends Phaser.Physics.Arcade.Sprite {
                 this.bloodAnimation();
 
                 this.muscles.explode( 60 );
+
+                this.showCodeMonkeyBanner();
             },
             [],
             this

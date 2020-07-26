@@ -1,5 +1,5 @@
 window.WebFontConfig = {
-  google: { families: ['Press Start 2P', 'Orbitron'] }
+  google: { families: ['Press Start 2P', 'Orbitron', 'Bangers'] }
 };
 
 (function() {

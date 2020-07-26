@@ -115,6 +115,13 @@ export default class Game extends Phaser.Scene {
       this.monkey.setTexture( 'headlessMonkey' );
       
       this.monkey.bloodAnimation();
+      
+      this.time.delayedCall(
+        750,
+        () => {
+          this.monkey.destroy();
+        }
+      )
 
       liuKang.once('animationcomplete_dragonMorph', (anim) => {
         liuKang.alpha = 0;
